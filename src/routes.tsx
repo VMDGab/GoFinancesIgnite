@@ -3,7 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons'
 import { Dashboard } from "./pages/Dashboard";
 import { Cadastro } from "./pages/Cadastro";
-import { Register} from "./Register";
+import { Register} from "./pages/Register";
 import { Platform } from 'react-native'
 import Theme from "./global/styles/Theme";
 const Tab = createBottomTabNavigator();

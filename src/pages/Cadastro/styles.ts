@@ -1,6 +1,5 @@
 import styled from 'styled-components/native';
 import { RFValue, RFPercentage } from 'react-native-responsive-fontsize';
-import {Feather} from '@expo/vector-icons'
 
 export const Container = styled.View`
   flex: 1;
@@ -19,22 +18,19 @@ font-size:${RFValue(20)}px ;
 color: ${({theme}) => theme.colors.shape};
 font-family: ${({theme}) => theme.fonts.regular};
 `
-export const InputBox = styled.View`
-
+export const Form = styled.View`
+flex:1;
 padding:${RFValue(24)}px;
+justify-content: space-between;
 
 `
-export const Input = styled.TextInput`
-padding-left: 10px;
-height:${RFValue(60)}px;
-background-color: ${({theme}) => theme.colors.shape};
-margin-bottom: ${RFValue(8)}px;
-border-radius: 5px;
-`
+export const Fields = styled.View``
+
 export const TransactionsTypes = styled.View`
 justify-content: space-between;
 flex-direction: row;
-margin: ${RFValue(0)}px ${RFValue(24)}px ;
+margin: ${RFValue(24)}px ${RFValue(0)}px ;
 align-items: center;
 
 `
+

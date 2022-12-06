@@ -24,9 +24,7 @@ interface Props {
   category: Category
   setCategory: (category: Category) => void
   closeSelectCategory: () => void
-  onPress:() => void
-
-}
+  }
 
 export function CategorySelect({
   category,

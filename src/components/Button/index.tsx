@@ -10,9 +10,9 @@ import {
   
     }
 
-export function Button({title, ...rest}: props) {
+export function Button({title, onPress}: props) {
   return (
-    <Container {...rest} >
+    <Container onPress={onPress} >
         <ButtonText>{title}</ButtonText>
     </Container>
   );

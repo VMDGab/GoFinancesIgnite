@@ -1,4 +1,6 @@
-import React from "react"
+import React from "react";
+import 'intl';
+import 'intl/locale-data/jsonp/pt-BR';
 import { StatusBar } from 'react-native'
 import { Routes } from "./src/routes";
 import AppLoading from "expo-app-loading"

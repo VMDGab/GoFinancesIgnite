@@ -6,7 +6,7 @@ import { RFValue } from 'react-native-responsive-fontsize';
 export const Container = styled.TouchableOpacity.attrs({
 activeOpacity: 0.7
 })`
-margin:${RFValue(24)}px;
+
 height: ${RFValue(60)}px;
 background-color: ${({theme}) => theme.colors.shape};
 flex-direction:row;

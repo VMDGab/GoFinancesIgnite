@@ -11,7 +11,7 @@ export const Container = styled.TouchableOpacity.attrs({
   align-items: center;
   justify-content: center;
   border-radius: 5px;
-  margin: ${RFValue(150)}px ${RFValue(24)}px ${RFValue(0)}px ${RFValue(24)}px;
+ 
 `;
   
 export const ButtonText = styled.Text`
