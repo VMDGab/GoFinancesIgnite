@@ -10,6 +10,7 @@ import {
   Icon,
   Name,
   Separator,
+  Footer,
 } from './styles';
 
 interface Category {
@@ -59,7 +60,9 @@ export function CategorySelect({
         )}
         ItemSeparatorComponent={ () => <Separator/> }
       />
+      <Footer>
       <Button title='Selecionar' onPress={closeSelectCategory}/>
+      </Footer>
     </Container>
   );
 }

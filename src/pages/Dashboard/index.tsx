@@ -18,11 +18,11 @@ import {
 } from './styles';
 
 import { HighlightCard } from '../../components/HighlightCard';
-import { TransactionCard, TransactionsCardProps } from '../../components/TransactionCard';
+import { TransactionCard, TransactionCardProps } from '../../components/TransactionCard';
 
 
 
-export interface DataListProps extends TransactionsCardProps {
+export interface DataListProps extends TransactionCardProps {
   id: string
 }
 
@@ -31,13 +31,11 @@ export function Dashboard() {
   const [data, setData] = useState<DataListProps[]>([])
 
 
-
+const TransactionData = '@GoFinances:Cadastro';
 
   async function loadTransaction() {
 
-   
-    const TransactionData = '@GoFinances:Cadastro';
-    const response = await AsyncStorage.getItem(TransactionData)
+       const response = await AsyncStorage.getItem(TransactionData)
 
     const transaction = response ? JSON.parse(response) : []
 
@@ -70,6 +68,9 @@ export function Dashboard() {
   
   }
 
+  useEffect(() => {
+
+  },[])
   useEffect(() => {
 
   loadTransaction();

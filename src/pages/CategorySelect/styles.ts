@@ -61,3 +61,9 @@ background-color: ${({theme}) => theme.colors.text};
 
 
 `
+
+export const Footer = styled.View`
+
+padding: 24px;
+
+`
