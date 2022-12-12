@@ -67,10 +67,21 @@ padding: ${RFValue(20)}px ${RFValue(18)}px ${RFValue(0)}px  ${RFValue(18)}px;
 `
 export const Amount = styled.Text<TypeProps>`
 
-color: ${({theme, type}) => 
-
-type == 'total' ? theme.colors.shape : theme.colors.title
-};
+${({ type }) =>
+    type === 'positive' &&
+    css`
+      color: ${({ theme }) => theme.colors.success};
+    `}
+  ${({ type }) =>
+    type === 'negative' &&
+    css`
+      color: ${({ theme }) => theme.colors.attention};
+    `}
+  ${({ type }) =>
+    type === 'total' &&
+    css`
+      color: ${({ theme }) => theme.colors.shape};
+    `}
 font-size :${(RFValue(20))}px; 
 font-family: ${(props) => props.theme.fonts.medium};
 

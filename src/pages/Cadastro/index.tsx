@@ -37,7 +37,7 @@ export function Cadastro() {
 
     loadData();
 
-    console.log(TransactionData)
+   
   }, [])
 
   interface FormData {

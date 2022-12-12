@@ -3,7 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons'
 import { Dashboard } from "./pages/Dashboard";
 import { Cadastro } from "./pages/Cadastro";
-import { Register} from "./pages/Register";
+import { Resume} from "./pages/Resume";
 import { Platform } from 'react-native'
 import Theme from "./global/styles/Theme";
 const Tab = createBottomTabNavigator();
@@ -58,7 +58,7 @@ export function Routes(){
           )
         }}
         name={'Resumo'}
-        component={Register}
+        component={Resume}
       />
 
         </Tab.Navigator>
