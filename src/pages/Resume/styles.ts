@@ -18,3 +18,8 @@ font-size:${RFValue(20)}px ;
 color: ${({theme}) => theme.colors.shape};
 font-family: ${({theme}) => theme.fonts.regular};
 `
+export const CategoryList = styled.FlatList`
+
+padding: 12px 24px
+
+`
