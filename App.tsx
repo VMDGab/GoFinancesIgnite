@@ -14,7 +14,7 @@ import {
   Poppins_700Bold
 } from '@expo-google-fonts/poppins';
 
-
+import { Signin } from "./src/pages/Signin";
 
 
 export default function App() {
@@ -32,14 +32,7 @@ export default function App() {
   return (
     <ThemeProvider theme={Theme}>
 
-      <StatusBar
-        barStyle={'light-content'}
-        translucent
-        backgroundColor={Theme.colors.primary}
-      />
-      <NavigationContainer>
-        <Routes />
-      </NavigationContainer>
+    <Signin/>
 
     </ThemeProvider>
 
