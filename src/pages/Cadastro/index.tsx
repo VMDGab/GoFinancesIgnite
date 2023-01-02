@@ -22,13 +22,15 @@ import {
   TransactionsTypes,
 } from './styles';
 
+import { useAuth } from '../../hooks/auth';
 
 
 export function Cadastro() {
 
+  const {user} = useAuth()
   const navigation = useNavigation();
 
-  const TransactionData = '@GoFinances:Cadastro';
+  const TransactionData = `@GoFinances:Cadastro_user:${user.id}`;
   useEffect(() => {
     async function loadData() {
       const data = await AsyncStorage.getItem(TransactionData);

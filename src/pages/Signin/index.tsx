@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import AppleSvg from '../../assets/apple.svg';
 import GoogleSvg from '../../assets/google.svg';
 import LogoSvg from '../../assets/Logo.svg';
+import { useAuth } from '../../hooks/auth';
 
 import { SignInSocialButton } from '../../components/SignInSocialButton';
+
 
 import {
   Container,
@@ -15,8 +17,37 @@ import {
   Footer,
   FooterWrapper,
 } from './styles';
+import { Alert, Platform } from 'react-native';
 
 export function Signin() {
+
+  const { signInWithGoogle, signInWithApple } = useAuth()
+
+  async function handleSignInWithGoogle() {
+    try {
+
+      await signInWithGoogle();
+
+    } catch (error) {
+      console.log(error)
+      Alert.alert('Não foi possivel se conectar a uma conta Google')
+
+    }
+
+  }
+
+  async function handleSignInWithApple() {
+    try {
+
+      await signInWithApple();
+
+    } catch (error) {
+      console.log(error)
+      Alert.alert('Não foi possivel se conectar a uma conta apple')
+
+    }
+
+  }
   return (
     <Container>
       <Header>
@@ -43,11 +74,17 @@ export function Signin() {
         <FooterWrapper>
           <SignInSocialButton
             title='Entrar com Google'
-            svg={GoogleSvg} />
+            svg={GoogleSvg}
+            onPress={handleSignInWithGoogle}
+          />
 
-          <SignInSocialButton
-            title='Entrar com Apple'
-            svg={AppleSvg} />
+          { Platform.OS === 'ios' &&
+            <SignInSocialButton
+              title='Entrar com Apple'
+              svg={AppleSvg}
+              onPress={handleSignInWithApple}
+            />
+          }
         </FooterWrapper>
       </Footer>
 

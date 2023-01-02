@@ -1,14 +1,14 @@
 import React from "react";
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons'
-import { Dashboard } from "./pages/Dashboard";
-import { Cadastro } from "./pages/Cadastro";
-import { Resume} from "./pages/Resume";
+import { Dashboard } from "../pages/Dashboard";
+import { Cadastro } from "../pages/Cadastro";
+import { Resume} from "../pages/Resume";
 import { Platform } from 'react-native'
-import Theme from "./global/styles/Theme";
+import Theme from "../global/styles/Theme";
 const Tab = createBottomTabNavigator();
 
-export function Routes(){
+export function AppRoutes(){
 
   const theme = Theme
   

@@ -16,6 +16,7 @@ import {
   Title,
   TransactionList,
   LoadContainer,
+  Logout,
 } from './styles';
 
 import { HighlightCard } from '../../components/HighlightCard';
@@ -24,6 +25,7 @@ import { useFocusEffect } from '@react-navigation/native';
 
 import { ActivityIndicator } from 'react-native'
 import { useTheme } from 'styled-components';
+import { useAuth } from '../../hooks/auth'
 
 export interface DataListProps extends TransactionCardProps {
   id: string
@@ -41,43 +43,51 @@ interface HighLightData {
 }
 
 export function Dashboard() {
+
+  const { user, SignOut } = useAuth()
+
   const [isLoading, setIsLoading] = useState(true)
 
   const [transactions, settransactions] = useState<DataListProps[]>([])
   const [highlightData, setHighlightData] = useState<HighLightData>({} as HighLightData)
 
   const theme = useTheme();
-  const TransactionData = '@GoFinances:Cadastro';
+  const TransactionData = `@GoFinances:Cadastro_user:${user.id}`
 
 
-  function getLastTransaction(collection : DataListProps[]){
 
-    
+  function getLastTransaction(collection: DataListProps[]) {
 
-    const lastTransaction = 
-    new Date
-    (Math.max.apply(Math, collection
-    .map((transaction) => new Date(transaction.date).getTime())))
+    const collectionFilttered = collection
+      .filter(transaction => transaction.type === type);
+
+    if (collectionFilttered.length === 0)
+      return 0;
+
+    const lastTransaction =
+      new Date
+        (Math.max.apply(Math, collection
+          .map((transaction) => new Date(transaction.date).getTime())))
 
 
-    return `${lastTransaction.getDate()} de ${lastTransaction.toLocaleString('pt-BR', { month: 'long'})}`;
-   
+    return `${lastTransaction.getDate()} de ${lastTransaction.toLocaleString('pt-BR', { month: 'long' })}`;
+
   }
 
 
-  function getLastTransactionByType(collection : DataListProps[] , type : 'positive' | 'negative'){
-
-    
-
-    const lastTransaction = 
-    new Date
-    (Math.max.apply(Math, collection
-    .filter((transaction) => transaction.type === type)
-    .map((transaction) => new Date(transaction.date).getTime())))
+  function getLastTransactionByType(collection: DataListProps[], type: 'positive' | 'negative') {
 
 
-    return `${lastTransaction.getDate()} de ${lastTransaction.toLocaleString('pt-BR', { month: 'long'})}`;
-   
+
+    const lastTransaction =
+      new Date
+        (Math.max.apply(Math, collection
+          .filter((transaction) => transaction.type === type)
+          .map((transaction) => new Date(transaction.date).getTime())))
+
+
+    return `${lastTransaction.getDate()} de ${lastTransaction.toLocaleString('pt-BR', { month: 'long' })}`;
+
   }
 
 
@@ -127,7 +137,7 @@ export function Dashboard() {
     const lastTransactionEntries = getLastTransactionByType(transaction, 'positive');
 
     const lastTransactionExpensives = getLastTransactionByType(transaction, 'negative');
-    
+
     const IntervalTransactions = `01 á ${getLastTransaction(transaction)}`
 
     const total = entriesTotal - expensiveTotal
@@ -139,15 +149,18 @@ export function Dashboard() {
           style: 'currency',
           currency: 'BRL'
         }),
-        lastTransaction: ` Última entrada dia ${lastTransactionEntries}` 
+        lastTransaction: lastTransactionEntries === 0 
+        ? 'Não há transações' 
+        : `Última entrada dia ${lastTransactionEntries}`,
       },
-
       expensives: {
         amount: expensiveTotal.toLocaleString('pt-BR', {
           style: 'currency',
           currency: 'BRL'
         }),
-        lastTransaction: `Última saída dia ${lastTransactionExpensives}`
+        lastTransaction: lastTransactionExpensives === 0 ? 
+        'Não há transações' 
+        : `Última saída dia ${lastTransactionExpensives}`,
       },
 
       total: {
@@ -155,11 +168,11 @@ export function Dashboard() {
           style: 'currency',
           currency: 'BRL',
         }),
-        lastTransaction:  IntervalTransactions 
+        lastTransaction: IntervalTransactions
       }
     })
 
-     setIsLoading(false)
+    setIsLoading(false)
   }
 
   useEffect(() => {
@@ -171,8 +184,8 @@ export function Dashboard() {
   useFocusEffect(
 
     useCallback(() => { loadTransaction(); }, [])
-    
-    )
+
+  )
 
   const [grettings, setGrettings] = useState('');
 
@@ -207,19 +220,19 @@ export function Dashboard() {
 
               <UserHeader>
                 <User>
-                  <UserProfile source={require('../../assets/Leandro.jpeg')} />
+                  <UserProfile source={{ uri: user.photo }} />
 
                   <TextHeaderBox>
                     <GrettingsStyle>
                       {grettings}
                     </GrettingsStyle>
-                    <UserName>Leandro</UserName>
+                    <UserName>{user.name}</UserName>
                   </TextHeaderBox>
                 </User>
 
-
-                <LogoutButton name="power" />
-
+                <Logout onPress={SignOut}>
+                  <LogoutButton name="power" />
+                </Logout>
               </UserHeader>
 
 
@@ -232,7 +245,7 @@ export function Dashboard() {
                 type='positive'
                 title='Entradas'
                 amount={highlightData.entries.amount}
-                lastTransaction= {highlightData.entries.lastTransaction}
+                lastTransaction={highlightData.entries.lastTransaction}
               />
               <HighlightCard
                 type='negative'

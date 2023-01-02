@@ -21,6 +21,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { useTheme } from 'styled-components';
 import {addMonths, subMonths, format} from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { useAuth } from '../../hooks/auth';
 
 interface TransactionData {
   type: 'positive' | 'negative'
@@ -42,13 +43,16 @@ interface CategoryData {
 
 export function Resume() {
 
+  const {user} = useAuth()
   const [isLoading, setIsLoading] = useState(false);
+  
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>([]);
 
   const theme = useTheme();
 
-  const TransactionData = '@GoFinances:Cadastro';
+  const TransactionData = `@GoFinances:Cadastro_user:${user.id}`
+  ;
 
   function handlDateChange(action: 'next' | 'prev'){    
     if(action === 'next'){

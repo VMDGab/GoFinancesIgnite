@@ -2,11 +2,13 @@ import React from "react";
 import 'intl';
 import 'intl/locale-data/jsonp/pt-BR';
 import { StatusBar } from 'react-native'
-import { Routes } from "./src/routes";
+import { Routes } from "./src/routes/";
 import AppLoading from "expo-app-loading"
 import { NavigationContainer } from '@react-navigation/native';
 import Theme from "./src/global/styles/Theme";
 import { ThemeProvider } from 'styled-components'
+import { AuthProvider } from "./src/hooks/auth";
+
 import {
   useFonts,
   Poppins_400Regular,
@@ -31,8 +33,9 @@ export default function App() {
 
   return (
     <ThemeProvider theme={Theme}>
-
-    <Signin/>
+    <AuthProvider>
+    <Routes/>
+    </AuthProvider>
 
     </ThemeProvider>
 
